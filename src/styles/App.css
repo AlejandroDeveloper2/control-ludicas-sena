@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+*{
+    box-sizing: border-box;
+    padding:0;
+    margin:0;  
+    font-family:'Open Sans Condensed', sans-serif;
+}
+body{
+    background-image: url('../images/fondo.png');
+    background-repeat: no-repeat;
+    background-size:100% ;
+    color:#000;
+}
