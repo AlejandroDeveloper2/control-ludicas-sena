@@ -49,6 +49,14 @@ export const isInputEmpty=(inputs, referenciasElementos, IdForm)=>{
                 referenciasElementos.email.current.style.borderBottom='solid 1px #000';        
             }
         break;
+        case 'loginForm':
+            if(inputs.identificacion!==''){
+                referenciasElementos.identificacionR.current.style.borderBottom='solid 1px #000';
+            }
+            if(inputs.contraseña!==''){
+                referenciasElementos.pass.current.style.borderBottom='solid 1px #000';
+            }
+        break;
         //caso especial del input vericar password
         case 'inputVerificarPass':
             if(inputs.passVerify === inputs.pass){                

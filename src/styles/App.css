@@ -8,6 +8,8 @@
 body{
     background-image: url('../images/fondo.png');
     background-repeat: no-repeat;
-    background-size:100% ;
+    background-size:cover;
+    background-position: center center;
+    background-attachment: fixed;
     color:#000;
 }

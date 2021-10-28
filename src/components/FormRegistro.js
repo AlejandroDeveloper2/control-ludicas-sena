@@ -177,57 +177,41 @@ const FormRegistro=({show, handleClose})=> {
         if(nuevoUsuario.nombres ===""){         
             handleShowAlert();
             setMessageError('El campo nombre no puede ser vacio!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)
             isFocused(nombre_txt, isFocus);    
         }
         else if(nuevoUsuario.apellidos ===""){
             handleShowAlert();
-            setMessageError('El campo apellidos no puede ser vacio!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)         
+            setMessageError('El campo apellidos no puede ser vacio!');        
             isFocused(apellido_txt, isFocus);                
         }
         else if(nuevoUsuario.numeroDocumento ===""){
             handleShowAlert();
             setMessageError('El campo número documento no puede ser vacio!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000) 
             isFocused(numDoc_txt, isFocus);           
         }
         else if(tipoDoc_txt.current.value === "0"){
             handleShowAlert();
-            setMessageError('Selecciona tu tipo de número documento!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)    
+            setMessageError('Selecciona tu tipo de número documento!');  
             isFocused(tipoDoc_txt, isFocus);                      
         }
         else if(tipoUsu_txt.current.value === "0"){
             handleShowAlert();
             setMessageError('Selecciona tu tipo de usuario!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)  
             isFocused(tipoUsu_txt, isFocus);                          
         }
         else if(lugarLudicas_txt.current.value === "0"){
             handleShowAlert();
             setMessageError('Selecciona el lugar de actividades ludicas!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)  
             isFocused(lugarLudicas_txt, isFocus);                         
         }
         else if(nuevoUsuario.correoElectronico === ""){
             handleShowAlert();
             setMessageError('El campo correo no puede ser vacio!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)  
             isFocused(correo_txt, isFocus);           
         }
         else if(nuevoUsuario.contraseña ===""){
             handleShowAlert();
-            setMessageError('El campo contraseña no puede ser vacio!');
-            //la alerta se cierre en dos segundos
-            setTimeout(()=>{handleCloseAlert()},2000)  
+            setMessageError('El campo contraseña no puede ser vacio!');      
             isFocused(pass_txt, isFocus);                  
         }
         else if(nuevoUsuario.contraseña !== valorPasswordR){
@@ -251,6 +235,7 @@ const FormRegistro=({show, handleClose})=> {
              //el formulario se cierre en 5 segundos
             setTimeout(()=>{handleClose()},5000)
         }
+        setTimeout(()=>{handleCloseAlert()},2000)  
         IdForm='inputVerificarPass';
         const elementos={
             pass:nuevoUsuario.contraseña,

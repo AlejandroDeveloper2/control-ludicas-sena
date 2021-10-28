@@ -44,7 +44,6 @@ const FormRecuperarClave=({show, handleClose})=>{
         if(valorEmail ===""){
             setMessageError('El campo correo electronico no puede ser vacio!');
             handleShowAlert();
-            setTimeout(()=>{handleCloseAlert()}, 2000);
             isFocused(correo_txt, isFocus);
         }else{
             handleCloseAlert();
@@ -61,6 +60,7 @@ const FormRecuperarClave=({show, handleClose})=>{
              //el formulario se cierre en 5 segundos
             setTimeout(()=>{handleClose()},5000)
         }
+        setTimeout(()=>{handleCloseAlert()}, 2000);
     }
     return(
         <Modal show={show} onHide={handleClose}  >

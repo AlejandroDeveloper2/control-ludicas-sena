@@ -4,7 +4,7 @@ import Logo from '../images/logo.webp';
 //componente pie de pagina 
 const Footer=()=>{
     return(
-        <FooterDiv>
+        <FooterDiv className="position-absolute ">
             <article>
                 <h5>© Aplicacion web creada por aprendiz de El SENA
                 todos los derechos reservados</h5>
