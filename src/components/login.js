@@ -7,8 +7,9 @@ import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
 import {isFocused, focusOn,focusOff, isInputEmpty} from '../functions/focusInput';
+import breakpoint from '../functions/Breakpoints';
 //componente login 
-const Login=()=>{
+const Login=()=>{  
     var IdForm='loginForm';
     //hook para el modal de registro de usuarios
     const [show, setShow] = useState(false);
@@ -91,7 +92,7 @@ const Login=()=>{
         setTimeout(()=>{handleCloseAlert()}, 2000);
     }
     return(
-        <div style={{minHeight: 'calc(100vh - 200px)'}}>
+        <div >
             <Form onSubmit={onSubmit}>           
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -119,22 +120,22 @@ const Login=()=>{
                             <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                             <path fillRule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                     </svg>
-                    Iniciar sesión
+                    Iniciar sesión                  
                 </Boton>
-                <FilaVariant>
+                <FilaVariant className="fila_variant">
                     <BotonRecuperar title="Restablecer contraseña olvidada" onClick={handleShowR} type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                             <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                             <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                         </svg>
-                        Recuperar contraseña
+                        <p> Recuperar contraseña</p>                
                     </BotonRecuperar>
                     <BotonRegistrar title="Registrate si aun no estas registrado" onClick={handleShow} type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus-square" viewBox="0 0 16 16">
                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
-                        Crear cuenta nueva
+                        <p>Crear cuenta nueva</p>    
                     </BotonRegistrar>
                 </FilaVariant>
             </Form>
@@ -149,15 +150,18 @@ const Login=()=>{
     );
 }
 //componentes con estilos
-const Form= styled.form`
+export const Form= styled.form`
     width:60%;
     margin:100px auto;
-    min-width:400px;
+    min-width:300px;
     max-width:400px;
     text-align:center;
     background-color:rgba(255, 255, 255,0.7);
     padding:30px;
     box-shadow:10px 10px 10px rgba(0,0,0,0.5);
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        margin-top:75px;
+    }
 `;
 export const Input=styled.input`
     width:100%;
@@ -177,10 +181,12 @@ export const Input=styled.input`
 `;
 export const Fila=styled.div`
     display:grid;
+    width:100%;
     grid-template-columns:0.1fr 1fr;
 `;
 export const FilaVariant=styled(Fila)`
     grid-template-columns:1fr 1fr;
+    
 `;
 export const Col=styled.div`
     display:flex;
@@ -200,6 +206,12 @@ export const Boton=styled.button`
     cursor:pointer;
     border:none;
     overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    p{
+        margin:0;
+    }
     svg{
         margin-right:10px;
     }
@@ -218,16 +230,28 @@ export const Boton=styled.button`
         left:0px;
         transition:all 0.5s ease;
     }
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        p{
+            display:none;
+        }
+    }
 `;
 export const BotonRecuperar=styled(Boton)`
     background:#7B2810;
     &::after{   
         background:#D42D19;
     }
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        width:90%;
+    }
 `;
 export const BotonRegistrar=styled(Boton)`
     margin-left:10px;
     width:95%;
     background:#2C8310;
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        width:100%;
+        margin-left:0;
+    }
 `;
 export default Login;
