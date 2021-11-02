@@ -1,7 +1,7 @@
 import React, {useRef, useState}from 'react';
 import { Modal, Container } from 'react-bootstrap';
 import {Input, Fila, Col, FilaVariant, BotonRecuperar as BotonLimpiar, BotonRegistrar} from './login';
-import {tieneNumeros, tieneLetras, tieneMinusculas, tieneMayusculas, tieneSimbolos} from '../functions/seguridadPassword';
+import {tieneNumeros, tieneLetras, tieneSimbolos, calcularSeguridadPass, valoracionSeguridadPass} from '../functions/seguridadPassword';
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
@@ -14,74 +14,13 @@ import styled from 'styled-components';
 const FormRegistro=({show, handleClose})=> {
     //variable para identificar el formulario
     var IdForm='formCreacionCuenta';
-    //declaramos una variable para guardar el puntaje de seguridad de la contraseña
-    var seguridadPuntaje=0;
     //hook para controlar el estado del medidor
     const[propsMedidor, setPropsMedidor]=useState({
         carga:'0%', 
         color:'none', 
         valoracion:'',
-        puntaje:seguridadPuntaje
+        puntaje:0
     });
-    // asignamos un valor a la barra medidora segun el puntaje de seguridad obtenido
-    const resultMedidor=(puntajeSeguridad)=>{
-        if(puntajeSeguridad === 0){
-            setPropsMedidor((propsMedidor)=>{
-                const newPropsMedidor={...propsMedidor};
-                newPropsMedidor.carga='0%';
-                newPropsMedidor.color='none';
-                newPropsMedidor.valoracion='';
-                newPropsMedidor.puntaje=0;
-                return newPropsMedidor;
-            });
-        }
-        else if(puntajeSeguridad>0 && puntajeSeguridad <= 30 ){
-            setPropsMedidor((propsMedidor)=>{
-                const newPropsMedidor={...propsMedidor};
-                newPropsMedidor.carga='25%';
-                newPropsMedidor.color='#CE400F';
-                newPropsMedidor.valoracion='Muy debil';
-                newPropsMedidor.puntaje=puntajeSeguridad;
-                return newPropsMedidor;
-            });
-        }else if(puntajeSeguridad > 30 && puntajeSeguridad < 50){
-            setPropsMedidor((propsMedidor)=>{
-                const newPropsMedidor={...propsMedidor};
-                newPropsMedidor.carga='40%';
-                newPropsMedidor.color='#E1841B';
-                newPropsMedidor.valoracion='Debil';
-                newPropsMedidor.puntaje=puntajeSeguridad;
-                return newPropsMedidor;
-            });
-        }else if(puntajeSeguridad >=50 && puntajeSeguridad <= 65){
-            setPropsMedidor((propsMedidor)=>{
-                const newPropsMedidor={...propsMedidor};
-                newPropsMedidor.carga='50%';
-                newPropsMedidor.color='#1B8DE1';
-                newPropsMedidor.valoracion='Normal';
-                newPropsMedidor.puntaje=puntajeSeguridad;
-                return newPropsMedidor;
-            });
-        }else if(puntajeSeguridad > 65 && puntajeSeguridad <= 80){
-            setPropsMedidor((propsMedidor)=>{
-                const newPropsMedidor={...propsMedidor};
-                newPropsMedidor.carga='75%';
-                newPropsMedidor.color='#38B81F';
-                newPropsMedidor.valoracion='Fuerte';
-                newPropsMedidor.puntaje=puntajeSeguridad;
-                return newPropsMedidor;
-            });
-        }else if(puntajeSeguridad > 80){
-            setPropsMedidor((propsMedidor)=>{
-                const newPropsMedidor={...propsMedidor};
-                newPropsMedidor.carga='100%';
-                newPropsMedidor.color='#24BDB3';
-                newPropsMedidor.valoracion='Muy Fuerte';
-                newPropsMedidor.puntaje=puntajeSeguridad;
-                return newPropsMedidor;
-            }); 
-        }
-    }
     //hook para capturar el valor de los  inputs
     const [nuevoUsuario, setNuevoUsuario]=useState({
         nombres:'',
@@ -160,34 +99,9 @@ const FormRegistro=({show, handleClose})=> {
         setNuevoUsuario(elementos)
         //console.log(elemento)  
         const clave = elementos.contraseña;     
-        calcularSeguridadPass(clave);      
-    }
-
-    const calcularSeguridadPass=(password)=>{
-        //validamos la seguridad de la password  
-        if(password.length !== 0){
-            if(tieneNumeros(password) &&  tieneLetras(password)){
-                seguridadPuntaje+=20;             
-            }         
-            if(tieneMinusculas(password) &&  tieneMayusculas(password)){
-                seguridadPuntaje+=20;
-            }
-            if(tieneSimbolos(password)){
-               seguridadPuntaje+=20;
-            }
-            if(password.length <=5){
-                seguridadPuntaje+=5;
-            }else if(password.length > 5 && password.length <= 8 ){
-                seguridadPuntaje+=20;
-            }else if(password.length > 8 ){
-                seguridadPuntaje+=40;
-            }   
-            resultMedidor(seguridadPuntaje);   
-        }else{
-            resultMedidor(0);
-        }
-    }
-    
+        let puntaje=calcularSeguridadPass(clave); 
+        valoracionSeguridadPass(puntaje, setPropsMedidor);       
+    }   
     const onSubmit=(e) => {
         IdForm='inputVerificarPass';
         e.preventDefault();
