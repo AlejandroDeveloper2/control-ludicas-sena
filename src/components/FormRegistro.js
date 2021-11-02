@@ -6,7 +6,7 @@ import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
 import MedidorSeguridad from './MedidorSeguridadClave';
-import {isFocused, focusOn,focusOff, isInputEmpty} from '../functions/focusInput';
+import {marcarInputErroneo, focusOn,focusOff} from '../functions/focusInput';
 //import {TransitionGroup } from "react-transition-group";
 import styled from 'styled-components';
 //componente formulario de registro
@@ -86,9 +86,9 @@ const FormRegistro=({show, handleClose})=> {
         nombres:'',
         apellidos:'',
         numeroDocumento:'',
-        tipoDocumento:'',
-        tipoUsuario:'',
-        lugarLudicas:'',
+        tipoDocumento:'0',
+        tipoUsuario:'0',
+        lugarLudicas:'0',
         correoElectronico:'',
         contraseña:''
     });
@@ -114,16 +114,44 @@ const FormRegistro=({show, handleClose})=> {
     const verify_pass_txt=useRef();
     const pass_txt=useRef();
     const nombre_txt=useRef();
-    const apellido_txt=useRef();
-    const numDoc_txt=useRef();
-    const tipoDoc_txt=useRef();
+    const apellido_txt=useRef(); 
+    const numDoc_txt=useRef(); 
+    const tipoDoc_txt=useRef(); 
     const tipoUsu_txt=useRef();
-    const lugarLudicas_txt=useRef();
-    const correo_txt=useRef();
+    const lugarLudicas_txt=useRef(); 
+    const correo_txt=useRef();  
     
     const getVerifyPassword=(e)=>{
         const valorInput=e.target.value;
         setValorPasswordR(valorInput);
+    }
+    const onBlurr=()=>{
+        const arrayElementos=[nombre_txt, apellido_txt, numDoc_txt, tipoDoc_txt, tipoUsu_txt, lugarLudicas_txt, correo_txt, pass_txt, verify_pass_txt];
+        focusOff(arrayElementos, IdForm);
+    }
+    const onFocuss=()=>{
+        if(document.activeElement.name){
+            if(document.activeElement.name==='nombres')
+                focusOn(nombre_txt);
+            else if(document.activeElement.name==='apellidos'){
+                focusOn(apellido_txt);
+            }else if(document.activeElement.name==='numeroDocumento'){
+                focusOn(numDoc_txt);
+            }else if(document.activeElement.name==='tipoDocumento'){
+                focusOn(tipoDoc_txt);
+            }else if(document.activeElement.name==='tipoUsuario'){
+                focusOn(tipoUsu_txt);
+            }else if(document.activeElement.name==='lugarLudicas'){
+                focusOn(lugarLudicas_txt);
+            }else if(document.activeElement.name==='correoElectronico'){
+                focusOn(correo_txt);
+            }
+            else if(document.activeElement.name==='contraseña'){
+                focusOn(pass_txt);
+            }else if(document.activeElement.name==='verify_pass'){
+                focusOn(verify_pass_txt);
+            }
+        }
     }
     //funcion que captura y evalua la password ingresada por el usuario
     const getDataUser=(e)=>{   
@@ -131,18 +159,7 @@ const FormRegistro=({show, handleClose})=> {
         setNuevoUsuario(elementos)
         //console.log(elemento)  
         const clave = elementos.contraseña;     
-        calcularSeguridadPass(clave);   
-        const referenciasElementos={
-            nombres:nombre_txt,
-            apellido:apellido_txt,
-            numDocumento:numDoc_txt,
-            tipoDoc:tipoDoc_txt,
-            tipoUsu:tipoUsu_txt,
-            lugarLudicas:lugarLudicas_txt,
-            correo:correo_txt,
-            clave:pass_txt
-        }
-        isInputEmpty(elementos, referenciasElementos, IdForm);    
+        calcularSeguridadPass(clave);      
     }
 
     const calcularSeguridadPass=(password)=>{
@@ -171,55 +188,69 @@ const FormRegistro=({show, handleClose})=> {
     }
     
     const onSubmit=(e) => {
-        var isFocus=true;
+        IdForm='inputVerificarPass';
         e.preventDefault();
         //validaciones formulario
         if(nuevoUsuario.nombres ===""){         
             handleShowAlert();
             setMessageError('El campo nombre no puede ser vacio!');
-            isFocused(nombre_txt, isFocus);    
+            marcarInputErroneo(nombre_txt);    
+        }else if(tieneNumeros(nuevoUsuario.nombres) || tieneSimbolos(nuevoUsuario.nombres)){
+            handleShowAlert();
+            setMessageError('El campo nombre solo puede contener letras!');
+            marcarInputErroneo(nombre_txt); 
         }
         else if(nuevoUsuario.apellidos ===""){
             handleShowAlert();
             setMessageError('El campo apellidos no puede ser vacio!');        
-            isFocused(apellido_txt, isFocus);                
+            marcarInputErroneo(apellido_txt);                
+        }
+        else if(tieneNumeros(nuevoUsuario.apellidos) || tieneSimbolos(nuevoUsuario.apellidos)){
+            handleShowAlert();
+            setMessageError('El campo apellidos solo puede contener letras!');        
+            marcarInputErroneo(apellido_txt); 
         }
         else if(nuevoUsuario.numeroDocumento ===""){
             handleShowAlert();
             setMessageError('El campo número documento no puede ser vacio!');
-            isFocused(numDoc_txt, isFocus);           
+            marcarInputErroneo(numDoc_txt);           
+        }
+        else if(tieneLetras(nuevoUsuario.numeroDocumento) || tieneSimbolos(nuevoUsuario.numeroDocumento)){
+            handleShowAlert();
+            setMessageError('El campo número documento solo puede contener números!');
+            marcarInputErroneo(numDoc_txt);
         }
         else if(tipoDoc_txt.current.value === "0"){
             handleShowAlert();
             setMessageError('Selecciona tu tipo de número documento!');  
-            isFocused(tipoDoc_txt, isFocus);                      
+            marcarInputErroneo(tipoDoc_txt);                      
         }
         else if(tipoUsu_txt.current.value === "0"){
             handleShowAlert();
             setMessageError('Selecciona tu tipo de usuario!');
-            isFocused(tipoUsu_txt, isFocus);                          
+            marcarInputErroneo(tipoUsu_txt);                          
         }
         else if(lugarLudicas_txt.current.value === "0"){
             handleShowAlert();
             setMessageError('Selecciona el lugar de actividades ludicas!');
-            isFocused(lugarLudicas_txt, isFocus);                         
+            marcarInputErroneo(lugarLudicas_txt);                         
         }
         else if(nuevoUsuario.correoElectronico === ""){
             handleShowAlert();
             setMessageError('El campo correo no puede ser vacio!');
-            isFocused(correo_txt, isFocus);           
+            marcarInputErroneo(correo_txt);           
         }
         else if(nuevoUsuario.contraseña ===""){
             handleShowAlert();
             setMessageError('El campo contraseña no puede ser vacio!');      
-            isFocused(pass_txt, isFocus);                  
+            marcarInputErroneo(pass_txt);                  
         }
         else if(nuevoUsuario.contraseña !== valorPasswordR){
             handleShowAlert();
             setMessageError('Las contraseñas no coinciden!');
             //la alerta se cierre en dos segundos
             setTimeout(()=>{handleCloseAlert()},2000)
-            isFocused(verify_pass_txt, isFocus);             
+            marcarInputErroneo(verify_pass_txt);             
         }else{          
             handleCloseAlert();
             handleShowAlertS();
@@ -236,13 +267,6 @@ const FormRegistro=({show, handleClose})=> {
             setTimeout(()=>{handleClose()},5000)
         }
         setTimeout(()=>{handleCloseAlert()},2000)  
-        IdForm='inputVerificarPass';
-        const elementos={
-            pass:nuevoUsuario.contraseña,
-            passVerify:valorPasswordR
-        };
-        const referenciasElementos={verifyPass:verify_pass_txt};
-        isInputEmpty(elementos, referenciasElementos, IdForm); 
     }
     const limpiarInputs=()=>{
         setNuevoUsuario((nuevoUsuario)=>{
@@ -250,9 +274,9 @@ const FormRegistro=({show, handleClose})=> {
             newUser.nombres='';
             newUser.apellidos='';
             newUser.numeroDocumento='';
-            newUser.tipoDocumento='';
-            newUser.tipoUsuario='';
-            newUser.lugarLudicas='';
+            newUser.tipoDocumento='0';
+            newUser.tipoUsuario='0';
+            newUser.lugarLudicas='0';
             newUser.correoElectronico='';
             newUser.contraseña='';
             return newUser;
@@ -269,9 +293,9 @@ const FormRegistro=({show, handleClose})=> {
     }
     return(
         <Modal show={show} onHide={handleClose} >
-            <Modal.Header closeButton style={{background: '#E1781B', color: '#fff'}}>
+            <Modal.Header closeButton style={{backgroundColor: 'rgb(33,37,41)', color: '#fff'}}>
                 <Modal.Title>  
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-people-fill" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-people-fill" viewBox="0 0 16 16" style={{marginRight:'10px'}}>
                         <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         <path fillRule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
                         <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
@@ -287,7 +311,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
                             </svg>
                         </Col>
-                        <Input type="text" name="nombres" onFocus={focusOn} onBlur={focusOff} ref={nombre_txt} value={nuevoUsuario.nombres} placeholder="Ingrese sus nombres" autocomplete={false} onChange={getDataUser }/>
+                        <Input type="text" name="nombres"  ref={nombre_txt} value={nuevoUsuario.nombres} placeholder="Ingrese sus nombres" autocomplete="off" onBlur={onBlurr} onFocus={onFocuss} onChange={getDataUser }/>
                     </Fila>
                     <Fila>
                         <Col>
@@ -296,7 +320,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
                             </svg>
                         </Col>
-                        <Input type="text" name="apellidos" onFocus={focusOn} onBlur={focusOff} ref={apellido_txt} value={nuevoUsuario.apellidos} placeholder="Ingrese sus apellidos" autocomplete={false} onChange={getDataUser } />
+                        <Input type="text" name="apellidos" ref={apellido_txt} value={nuevoUsuario.apellidos} placeholder="Ingrese sus apellidos" autocomplete="off" onBlur={onBlurr}  onFocus={onFocuss} onChange={getDataUser } />
                     </Fila>
                     <Fila>
                         <Col>
@@ -305,7 +329,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                             </svg>
                         </Col>
-                        <Input type="text" name="numeroDocumento" onFocus={focusOn} onBlur={focusOff} ref={numDoc_txt} value={nuevoUsuario.numeroDocumento} placeholder="Número de documento" autocomplete={false} onChange={getDataUser }/>
+                        <Input type="text" name="numeroDocumento"  ref={numDoc_txt} value={nuevoUsuario.numeroDocumento} onBlur={onBlurr} onFocus={onFocuss} placeholder="Número de documento" autocomplete="off" onChange={getDataUser }/>
                     </Fila>
                     <Fila>
                         <Col>
@@ -314,7 +338,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
                             </svg>
                         </Col>
-                        <Select  name="tipoDocumento" onFocus={focusOn} onBlur={focusOff} value={nuevoUsuario.tipoDocumento} ref={tipoDoc_txt} onChange={getDataUser}>
+                        <Select  name="tipoDocumento"  value={nuevoUsuario.tipoDocumento} ref={tipoDoc_txt} onBlur={onBlurr}  onFocus={onFocuss} onChange={getDataUser}>
                             <option value="0" defaultValue>
                                 Seleccione su tipo de documento
                             </option>
@@ -332,7 +356,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
                         </Col>
-                        <Select name="tipoUsuario" onFocus={focusOn} onBlur={focusOff} value={nuevoUsuario.tipoUsuario} ref={tipoUsu_txt} onChange={getDataUser}>
+                        <Select name="tipoUsuario"  value={nuevoUsuario.tipoUsuario} ref={tipoUsu_txt} onBlur={onBlurr} onFocus={onFocuss} onChange={getDataUser}>
                             <option value="0" defaultValue>
                                 Seleccione tipo de usuario
                             </option>
@@ -350,7 +374,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zm2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5z"/>
                             </svg>
                         </Col>
-                        <Select name="lugarLudicas" onFocus={focusOn} onBlur={focusOff} value={nuevoUsuario.lugarLudicas} ref={lugarLudicas_txt} onChange={getDataUser}>
+                        <Select name="lugarLudicas"  value={nuevoUsuario.lugarLudicas} ref={lugarLudicas_txt} onChange={getDataUser} onBlur={onBlurr} onFocus={onFocuss}>
                             <option value="0" defaultValue>
                                 Seleccione lugar para actividades ludicas
                             </option>
@@ -368,7 +392,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l6.709 3.933L8 8.928l1.291.717L16 5.715V5.4a2 2 0 0 0-1.059-1.765l-6-3.2zM16 6.873l-5.693 3.337L16 13.372v-6.5zm-.059 7.611L8 10.072.059 14.484A2 2 0 0 0 2 16h12a2 2 0 0 0 1.941-1.516zM0 13.373l5.693-3.163L0 6.873v6.5z"/>
                             </svg>
                         </Col>
-                        <Input type="email" name="correoElectronico" onFocus={focusOn} onBlur={focusOff} ref={correo_txt} value={nuevoUsuario.correoElectronico} placeholder="Ingrese su correo electronico" autocomplete={false} onChange={getDataUser} />
+                        <Input type="email" name="correoElectronico"  ref={correo_txt} onBlur={onBlurr}  onFocus={onFocuss} value={nuevoUsuario.correoElectronico} placeholder="Ingrese su correo electronico" autocomplete="off" onChange={getDataUser} />
                     </Fila>
                     <Fila>
                         <Col>
@@ -376,7 +400,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                             </svg>
                         </Col>
-                        <Input type="password" name="contraseña" onFocus={focusOn} onBlur={focusOff} ref={pass_txt} value={nuevoUsuario.contraseña} placeholder="Ingrese su contraseña" onChange={getDataUser} />
+                        <Input type="password" name="contraseña"  ref={pass_txt} onBlur={onBlurr}  onFocus={onFocuss} value={nuevoUsuario.contraseña} placeholder="Ingrese su contraseña" onChange={getDataUser} />
                     </Fila>
                     <Fila>
                         <Col>
@@ -393,7 +417,7 @@ const FormRegistro=({show, handleClose})=> {
                                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                             </svg>
                         </Col>
-                        <Input type="password"  ref={verify_pass_txt} onFocus={focusOn} onBlur={focusOff} value={valorPasswordR} placeholder="Verifique su contraseña" onChange={getVerifyPassword } />
+                        <Input type="password"  name='verify_pass' ref={verify_pass_txt}  onBlur={onBlurr} onFocus={onFocuss} value={valorPasswordR} placeholder="Verifique su contraseña" onChange={getVerifyPassword } />
                     </Fila>
                     <FilaVariant>
                         <BotonLimpiar  type="button" onClick={limpiarInputs} title="Limpiar formulario">

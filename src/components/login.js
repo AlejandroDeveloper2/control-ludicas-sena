@@ -6,10 +6,14 @@ import FormRecuperar from "./FormRecuperarContraseña";
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
-import {isFocused, focusOn,focusOff, isInputEmpty} from '../functions/focusInput';
+import {tieneLetras, tieneSimbolos} from '../functions/seguridadPassword';
+import {marcarInputErroneo, focusOff, focusOn} from '../functions/focusInput';
 import breakpoint from '../functions/Breakpoints';
+
+//variable global para el color del input al hacer focus 
+var color='#45CC1A';
 //componente login 
-const Login=()=>{  
+const Login=()=>{   
     var IdForm='loginForm';
     //hook para el modal de registro de usuarios
     const [show, setShow] = useState(false);
@@ -47,12 +51,21 @@ const Login=()=>{
     //funcion para capturar y modificar el estado de los inputs
     const getDataUserLogin=(e) => {
         const data={...loginDataUser, [e.target.name]: e.target.value};
-        setDataLogin(data);
-        const referenciasElementos={
-            identificacionR:identificacion_txt,
-            pass:pass_txt
-        }
-        isInputEmpty(data, referenciasElementos, IdForm);
+        setDataLogin(data);   
+
+    }
+    const onBlurr =()=>{   
+        const arrayElementos=[identificacion_txt, pass_txt];    
+        focusOff(arrayElementos, IdForm);
+    }
+    const onFocuss=()=>{
+        if(document.activeElement.name){
+            if(document.activeElement.name==='identificacion')
+                focusOn(identificacion_txt);
+            else{
+                focusOn(pass_txt);
+            }
+        }     
     }
     const limpiarInputs=()=>{
         setDataLogin((loginDataUser)=>{
@@ -61,19 +74,25 @@ const Login=()=>{
             newDataUserLogin.contraseña='';
             return newDataUserLogin
         });
+        
     }
+    
     const onSubmit=(e) => {
         e.preventDefault();
-        let isFocus=true;
         //validacion del form 
         if(loginDataUser.identificacion===''){
             setMessageError('El campo identificación no puede estar vacio!');
             handleShowAlert();
-            isFocused(identificacion_txt, isFocus);
-        }else if(loginDataUser.contraseña===''){
+            marcarInputErroneo(identificacion_txt);      
+        }else if(tieneLetras(loginDataUser.identificacion) || tieneSimbolos(loginDataUser.identificacion)){
+            setMessageError('El campo identificación solo puede contener números!');
+            handleShowAlert();
+            marcarInputErroneo(identificacion_txt);          
+        }
+        else if(loginDataUser.contraseña===''){
             setMessageError('El campo contraseña no puede estar vacio!');
             handleShowAlert();
-            isFocused(pass_txt, isFocus);
+            marcarInputErroneo(pass_txt);        
         }else{
             limpiarInputs();
             setMessageSuccess('Login correcto!');
@@ -93,7 +112,7 @@ const Login=()=>{
     }
     return(
         <div >
-            <Form onSubmit={onSubmit}>           
+            <Form onSubmit={onSubmit} >           
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                     <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -105,7 +124,7 @@ const Login=()=>{
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         </svg>
                     </Col>
-                    <Input type="text" name="identificacion" value={loginDataUser.identificacion} ref={identificacion_txt} onFocus={focusOn} onBlur={focusOff} placeholder="Digite su número de identificación" autocomplete={false} onChange={getDataUserLogin}/>               
+                    <Input type="text" name="identificacion"  onBlur={onBlurr} onFocus={onFocuss} value={loginDataUser.identificacion} ref={identificacion_txt} placeholder="Digite su número de identificación"  autocomplete="off" onChange={getDataUserLogin}/>               
                 </Fila>
                 <Fila>
                     <Col>
@@ -113,7 +132,7 @@ const Login=()=>{
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                         </svg>
                     </Col>
-                    <Input type="password" name="contraseña" value={loginDataUser.contraseña} ref={pass_txt} onFocus={focusOn} onBlur={focusOff} placeholder="************" onChange={getDataUserLogin}/>
+                    <Input type="password" name="contraseña"  onBlur={onBlurr} onFocus={onFocuss} value={loginDataUser.contraseña} ref={pass_txt}  placeholder="************" onChange={getDataUserLogin}/>
                 </Fila>            
                 <Boton title="Ingresar al sistema" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -176,7 +195,7 @@ export const Input=styled.input`
     transition:all 0.5 ease-in-out;
     &:focus{
         transition:all 0.5 ease-in-out;
-        border-bottom:2px solid #45CC1A;
+        border-bottom:2px solid ${color};
     }
 `;
 export const Fila=styled.div`
@@ -201,7 +220,7 @@ export const Boton=styled.button`
     padding:10px;
     margin-top:20px;
     z-index:1;
-    background:#000;
+    background:#EE7C12;
     position:relative;
     cursor:pointer;
     border:none;
@@ -223,7 +242,7 @@ export const Boton=styled.button`
         left:-360px;
         top:0;
         z-index:-1;
-        background:#EE7C12;
+        background:#C37220;
         transition:all 0.5s ease;
     }
     &:hover::after{
@@ -237,9 +256,9 @@ export const Boton=styled.button`
     }
 `;
 export const BotonRecuperar=styled(Boton)`
-    background:#7B2810;
+    background:#D42D19;
     &::after{   
-        background:#D42D19;
+        background:#BC2914;
     }
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         width:90%;
@@ -248,7 +267,6 @@ export const BotonRecuperar=styled(Boton)`
 export const BotonRegistrar=styled(Boton)`
     margin-left:10px;
     width:95%;
-    background:#2C8310;
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         width:100%;
         margin-left:0;

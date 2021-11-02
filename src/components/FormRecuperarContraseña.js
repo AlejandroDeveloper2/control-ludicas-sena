@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import { Modal, Container } from 'react-bootstrap';
 import {Input, Fila, Col, FilaVariant, BotonRecuperar as BotonLimpiar, BotonRegistrar as BotonVerificar} from './login';
-import {isFocused, focusOn,focusOff, isInputEmpty} from '../functions/focusInput';
+import {marcarInputErroneo, focusOff, focusOn} from '../functions/focusInput';
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
@@ -29,22 +29,23 @@ const FormRecuperarClave=({show, handleClose})=>{
     const getValueEmail=(e)=>{
         const valorInput=e.target.value;
         setValorEmail(valorInput);
-        const referenciasElementos={
-            email:correo_txt
-        }
-        isInputEmpty(valorInput, referenciasElementos, IdForm);
+    }   
+    const onBlurr =()=>{
+        focusOff(correo_txt, IdForm);
+    }
+    const onFocuss=()=>{
+        focusOn(correo_txt);        
     }
     const limpiarInputs=() => {
         setValorEmail('');
     }
     const onSubmit=(e)=>{
-        var isFocus=true;
         e.preventDefault();
         //validacion del form 
         if(valorEmail ===""){
             setMessageError('El campo correo electronico no puede ser vacio!');
             handleShowAlert();
-            isFocused(correo_txt, isFocus);
+            marcarInputErroneo(correo_txt);
         }else{
             handleCloseAlert();
             setMessageSuccess('Correo electronico verificado!');
@@ -64,7 +65,7 @@ const FormRecuperarClave=({show, handleClose})=>{
     }
     return(
         <Modal show={show} onHide={handleClose}  >
-            <Modal.Header closeButton style={{background: '#333333', color: '#fff'}}>
+            <Modal.Header closeButton style={{backgroundColor: 'rgb(33,37,41)', color: '#fff'}}>
                 <Modal.Title>  
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16" style={{marginRight:'10px'}}>
                         <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -74,14 +75,14 @@ const FormRecuperarClave=({show, handleClose})=>{
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} id="form">
                     <Fila>
                         <Col>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-envelope-open-fill" viewBox="0 0 16 16">
                                 <path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l6.709 3.933L8 8.928l1.291.717L16 5.715V5.4a2 2 0 0 0-1.059-1.765l-6-3.2zM16 6.873l-5.693 3.337L16 13.372v-6.5zm-.059 7.611L8 10.072.059 14.484A2 2 0 0 0 2 16h12a2 2 0 0 0 1.941-1.516zM0 13.373l5.693-3.163L0 6.873v6.5z"/>
                             </svg>
                         </Col>
-                        <Input type="email" name="correoElectronico" onFocus={focusOn} onBlur={focusOff} value={valorEmail} ref={correo_txt} placeholder="Ingrese su correo electronico" autocomplete={false} onChange={getValueEmail} />
+                        <Input type="email" name="correoElectronico" onBlur={onBlurr} onFocus={onFocuss} value={valorEmail} ref={correo_txt} placeholder="Ingrese su correo electronico" autocomplete="off" onChange={getValueEmail} />
                     </Fila>
                     <FilaVariant>
                         <BotonLimpiar  type="button"  title="Limpiar formulario" onClick={limpiarInputs}>
