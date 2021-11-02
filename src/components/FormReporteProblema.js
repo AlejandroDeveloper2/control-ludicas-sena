@@ -79,7 +79,8 @@ const FormReportar=()=>{
                     break;                             
                 }     
                 mensaje_txt.current.maxLength=10000;                         
-            }                                 
+            }  
+            setNumeroPalabras(p);                               
         } 
     }  
     const limpiarInputs =()=>{
