@@ -17,6 +17,7 @@ const Medidor=styled.div`
     height:20px;
     display: flex;
     align-items:center;
+    transition:all 0.6s ease;
     span{
         line-height:20px;
         color:#fff;

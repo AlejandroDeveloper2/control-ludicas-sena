@@ -1,8 +1,8 @@
 import Login from './components/login';
 import Footer from './components/Footer';
 import NotFound from './pages/NotFound';
-import Navegacion from './components/MenuNavegacionExterna';
 import FormReportar from './components/FormReporteProblema';
+import PanelControl from './pages/PanelControl';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,10 +13,10 @@ function App() {
   return (
     <div>
       <Router>
-        <Navegacion/>
         <Switch>
           <Route exact path="/" component={Login}/>
           <Route exact path="/ReportarProblema" component={FormReportar}/>
+          <Route exact path="/PanelControl" component={PanelControl}/>
           <Route component={NotFound} />
         </Switch>  
         <Footer/>  

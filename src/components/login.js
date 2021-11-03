@@ -1,14 +1,14 @@
 import React, {useState, useRef} from "react";
 import styled from 'styled-components';
 import {Container } from 'react-bootstrap';
-import FormRegistro from "./FormRegistro";
-import FormRecuperar from "./FormRecuperarContraseña";
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
 import {tieneLetras, tieneSimbolos} from '../functions/seguridadPassword';
 import {marcarInputErroneo, focusOff, focusOn} from '../functions/focusInput';
 import breakpoint from '../functions/Breakpoints';
+import Navegacion from './MenuNavegacionExterna';
+import VentanaModal from './ModalVentana';
 
 //variable global para el color del input al hacer focus 
 var color='#45CC1A';
@@ -112,6 +112,7 @@ const Login=()=>{
     }
     return(
         <div >
+            <Navegacion/>
             <Form onSubmit={onSubmit} >           
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -163,8 +164,8 @@ const Login=()=>{
                 <AlertaSuccess  message={messageSuccess} showAlert={showAlertSuccess} handleCloseAlert={handleCloseAlertS} /> 
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 
             </Container>
-            <FormRegistro show={show} handleClose={handleClose}/>
-            <FormRecuperar show={showR} handleClose={handleCloseR} />
+            <VentanaModal show={show} handleClose={handleClose} f='2'/>
+            <VentanaModal show={showR} handleClose={handleCloseR} f='1'/>
         </div>
     );
 }
@@ -192,9 +193,9 @@ export const Input=styled.input`
     position:relative;
     font-weight:bold;
     margin: 25px 25px 0px 0px;
-    transition:all 0.5 ease-in-out;
+    transition:all 0.3s ease;
     &:focus{
-        transition:all 0.5 ease-in-out;
+        transition:all 0.3s ease;
         border-bottom:2px solid ${color};
     }
 `;
