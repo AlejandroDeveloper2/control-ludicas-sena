@@ -345,7 +345,7 @@ const FormRegistro=()=> {
                     </BotonRegistrar>
                 </FilaVariant>
             </form>           
-            <Container>
+            <Container >
                 <AlertaError  message={messageError} showAlert={showAlertError} handleCloseAlert={handleCloseAlert}/>  
                 <AlertaSuccess  message={messageSuccess} showAlert={showAlertSuccess} handleCloseAlert={handleCloseAlertS} /> 
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 
