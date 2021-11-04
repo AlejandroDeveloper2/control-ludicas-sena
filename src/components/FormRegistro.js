@@ -1,6 +1,6 @@
 import React, {useRef, useState}from 'react';
 import {Container } from 'react-bootstrap';
-import {Input, Fila, Col, FilaVariant, BotonRecuperar as BotonLimpiar, BotonRegistrar} from './login';
+import {Input, Fila, Col, FilaVariant} from './login';
 import {tieneNumeros, tieneLetras, tieneSimbolos, calcularSeguridadPass, valoracionSeguridadPass} from '../functions/seguridadPassword';
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
@@ -8,8 +8,9 @@ import AlertaInfo from './AlertasInfo';
 import MedidorSeguridad from './MedidorSeguridadClave';
 import {validarCorreo} from '../functions/validacionCorreos';
 import {marcarInputErroneo, focusOn,focusOff} from '../functions/focusInput';
-//import {TransitionGroup } from "react-transition-group";
+import {BotonRecuperar as BotonLimpiar, BotonRegistrar} from './Botones';
 import styled from 'styled-components';
+
 //componente formulario de registro
 const FormRegistro=()=> {
     //variable para identificar el formulario

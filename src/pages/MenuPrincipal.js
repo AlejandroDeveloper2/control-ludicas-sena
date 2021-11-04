@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Logo from '../images/logo.png';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"; 
+import {BotonCerrarSesion, BotonPerfil, BotonEsconderMenu} from '../components/Botones';
 import breakpoint from '../functions/Breakpoints';
 
 const PanelAdmin=()=>{
@@ -61,7 +62,8 @@ const PanelAdmin=()=>{
         }
     }
     const ajustarMenu=()=>{
-       setMenu(ubicacionMenu.transform='translateX(0)');      
+       setMenu(ubicacionMenu.transform='translateX(0)');   
+       setbotonMenu(ubicacionBoton.marginLeft='0');   
     }
 
     window.addEventListener('resize', ajustarMenu);
@@ -123,18 +125,81 @@ const PanelAdmin=()=>{
                 </ContenedorLogo>
             </ContenedorMenu>
             <BotonEsconderMenu onClick={esconderMenu} style={ubicacionBoton} >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16" style={iconoBotonRotate}>
-                    <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16" style={iconoBotonRotate}>
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                 </svg>
             </BotonEsconderMenu>
             <MenuHorizontal>
-
+                <InfoUser>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                    <span>Bienvenido: Diego Alejandro Diaz Bonilla</span>
+                    <BotonPerfil title="Configurar perfil de usuario">                         
+                        <Svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-gear-fill" viewBox="0 0 16 16">
+                            <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                        </Svg>
+                        <svg style={{
+                            width:'100%', 
+                            height:'100%', 
+                            position:'absolute',
+                            left:'0', 
+                            top:'0', 
+                            fill:'none'}}>
+                            <rect x="0" y="0" fill="none"></rect>
+                        </svg>
+                    </BotonPerfil>
+                    <BotonCerrarSesion title="Cerrar sesión">
+                        <Svg1 xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </Svg1>
+                    </BotonCerrarSesion>
+                </InfoUser>
             </MenuHorizontal>
         </ContenedorPagina>
     );
 }
 export default PanelAdmin;
 //estilos
+export const Svg=styled.svg`
+    transition:all 0.9s ease;
+`;
+export const Svg1=styled.svg`
+    transition:all 0.6s ease;
+`;
+const InfoUser=styled.div`
+    width:30%;
+    height:100%;
+    right:0;
+    position:absolute;
+    background:transparent;
+    border-left:solid 1px rgba(225,120,27,0.9);
+    display:flex;
+    justify-content:end;
+    color:#fff;
+    align-items:center;
+    overflow:hidden;
+    transition: all 0.5s ease;
+    span{
+        margin:0 20px;
+    }
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        width:95%;    
+        padding-left:10px;
+        span{
+            margin:0 10px;
+        }
+    }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        padding-left:10px;
+        width:85%;
+    }
+    @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
+        width:75%;
+    }
+`;
 const ContenedorMenu=styled.div`
     width:15%;
     height:100%;
@@ -155,7 +220,7 @@ const ContenedorMenu=styled.div`
         transition: all 0.5s ease;
     }
     @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
-        width:22%;
+        width:25%;
         transition: all 0.5s ease;
     }
 `;
@@ -221,7 +286,6 @@ const HeaderMenu=styled.div`
 const Ul=styled.div`
     width:100%;
     display:block;
-    font-weight:bold;
     cursor:pointer;
     li{
         border-bottom:1px solid #333;
@@ -319,46 +383,9 @@ const ContenedorLogo=styled.div`
             display:none;
         }
     }
-`;
-const BotonEsconderMenu=styled.button`
-    width:60px;
-    height:40px;
-    background:#000;
-    color:#fff;
-    font-weight:bold;
-    border:none;
-    display:none;
-    position:relative;
-    margin-top:20%;
-    border-bottom-right-radius:10px;
-    border-top-right-radius:10px;
-    overflow:hidden;
-    z-index:1;
-    transition:all 0.5s ease;
-    &::after{
-        content:'';
-        opacity:0;
-        transform:scaleX(0);
-        position:absolute;
-        width:100%;
-        height:100%;
-        left:0px;
-        top:0;
-        z-index:-1;
-        background:rgba(225,120,27,1);
-        transition:all 0.5s ease;
+    @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
+        p{
+            display:none;
+        }
     }
-    &:hover::after{
-        transition: all  0.5s ease-in;
-        transform:scaleX(1);
-        opacity:1;
-    } 
-    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        display:block;
-        position:absolute;  
-    }
-    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
-        display:block;
-        position:absolute;
-    }   
 `;

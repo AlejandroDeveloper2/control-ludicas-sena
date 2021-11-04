@@ -1,14 +1,15 @@
 import React  from 'react';
 import { Alert } from 'react-bootstrap';
+import styled from 'styled-components';
 const AlertaError=({message, showAlert, handleCloseAlert})=>{    
     if (showAlert) {
       return (
-        <Alert variant="danger" style={{width:'100%', minWidth:'400px', marginTop:'10px'}} onClose={handleCloseAlert} dismissible>
+        <AlertModify variant="danger"  onClose={handleCloseAlert} dismissible>
           <Alert.Heading>Error!</Alert.Heading>
           <p>
            {message}
           </p>
-        </Alert>
+        </AlertModify>
       );
     }else{
         return(
@@ -19,3 +20,8 @@ const AlertaError=({message, showAlert, handleCloseAlert})=>{
     }
 }
 export default AlertaError;
+export const AlertModify=styled(Alert)`
+  width:100%;
+  min-width:300px;
+  margin-top:10px;
+`;

@@ -5,7 +5,7 @@ const MedidorSeguridadClave=({propsMedidor})=>{
 
     return(
         <ContenedorMedidor>
-            <Medidor style={{width:propsMedidor.carga, background:propsMedidor.color}}>
+            <Medidor load={propsMedidor.carga} colorFondo={propsMedidor.color}>
                 <span> 
                     {propsMedidor.valoracion+' : '+ propsMedidor.puntaje}
                 </span>
@@ -17,7 +17,9 @@ const Medidor=styled.div`
     height:20px;
     display: flex;
     align-items:center;
-    transition:all 0.6s ease;
+    transition:all  0.6s ease-in-out;
+    width:${props=>props.load};
+    background:${props=>props.colorFondo};
     span{
         line-height:20px;
         color:#fff;

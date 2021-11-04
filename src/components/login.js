@@ -9,6 +9,9 @@ import {marcarInputErroneo, focusOff, focusOn} from '../functions/focusInput';
 import breakpoint from '../functions/Breakpoints';
 import Navegacion from './MenuNavegacionExterna';
 import VentanaModal from './ModalVentana';
+import FormRecuperar from './FormRecuperarContraseña';
+import FormCreacionCuenta from './FormRegistro';
+import {BotonRecuperar, BotonRegistrar, Boton} from './Botones';
 
 //variable global para el color del input al hacer focus 
 var color='#45CC1A';
@@ -76,9 +79,7 @@ const Login=()=>{
         });
         
     }
-    
-    const onSubmit=(e) => {
-        e.preventDefault();
+    const validacionForm=()=>{
         //validacion del form 
         if(loginDataUser.identificacion===''){
             setMessageError('El campo identificación no puede estar vacio!');
@@ -109,11 +110,15 @@ const Login=()=>{
             setTimeout(()=>{handleCloseAlertS()}, 2000);
         }
         setTimeout(()=>{handleCloseAlert()}, 2000);
+    }  
+    const onSubmit=(e) => {
+        e.preventDefault();
+        validacionForm();
     }
     return(
         <div >
             <Navegacion/>
-            <Form onSubmit={onSubmit} >           
+            <Form onSubmit={onSubmit}>           
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                     <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -125,7 +130,7 @@ const Login=()=>{
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         </svg>
                     </Col>
-                    <Input type="text" name="identificacion"  onBlur={onBlurr} onFocus={onFocuss} value={loginDataUser.identificacion} ref={identificacion_txt} placeholder="Digite su número de identificación"  autocomplete="off" onChange={getDataUserLogin}/>               
+                    <Input type="text" name="identificacion"  onBlur={onBlurr}  onFocus={onFocuss} value={loginDataUser.identificacion} ref={identificacion_txt} placeholder="Digite su número de identificación"  autocomplete="off" onChange={getDataUserLogin}/>               
                 </Fila>
                 <Fila>
                     <Col>
@@ -133,7 +138,7 @@ const Login=()=>{
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                         </svg>
                     </Col>
-                    <Input type="password" name="contraseña"  onBlur={onBlurr} onFocus={onFocuss} value={loginDataUser.contraseña} ref={pass_txt}  placeholder="************" onChange={getDataUserLogin}/>
+                    <Input type="password" name="contraseña"  onBlur={onBlurr}  onFocus={onFocuss} value={loginDataUser.contraseña} ref={pass_txt}  placeholder="************" onChange={getDataUserLogin}/>
                 </Fila>            
                 <Boton title="Ingresar al sistema" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -164,8 +169,13 @@ const Login=()=>{
                 <AlertaSuccess  message={messageSuccess} showAlert={showAlertSuccess} handleCloseAlert={handleCloseAlertS} /> 
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 
             </Container>
-            <VentanaModal show={show} handleClose={handleClose} f='2'/>
-            <VentanaModal show={showR} handleClose={handleCloseR} f='1'/>
+            <VentanaModal show={show} handleClose={handleClose} titulo='Formulario de registro'>           
+                <FormCreacionCuenta />
+            </VentanaModal>
+
+            <VentanaModal show={showR} handleClose={handleCloseR} titulo='Recuperación de contraseña' >
+                <FormRecuperar/>
+            </VentanaModal>
         </div>
     );
 }
@@ -193,9 +203,7 @@ export const Input=styled.input`
     position:relative;
     font-weight:bold;
     margin: 25px 25px 0px 0px;
-    transition:all 0.3s ease;
     &:focus{
-        transition:all 0.3s ease;
         border-bottom:2px solid ${color};
     }
 `;
@@ -213,64 +221,6 @@ export const Col=styled.div`
     justify-content:center;
     svg{
         margin-top:25px;
-    }
-`;
-export const Boton=styled.button`
-    color:#fff;
-    width:100%;
-    padding:10px;
-    margin-top:20px;
-    z-index:1;
-    background:#EE7C12;
-    position:relative;
-    cursor:pointer;
-    border:none;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    p{
-        margin:0;
-    }
-    svg{
-        margin-right:10px;
-    }
-    &::after{
-        content:'';
-        position:absolute;
-        width:100%;
-        height:100%;
-        left:-360px;
-        top:0;
-        z-index:-1;
-        background:#C37220;
-        transition:all 0.5s ease;
-    }
-    &:hover::after{
-        left:0px;
-        transition:all 0.5s ease;
-    }
-    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        p{
-            display:none;
-        }
-    }
-`;
-export const BotonRecuperar=styled(Boton)`
-    background:#D42D19;
-    &::after{   
-        background:#BC2914;
-    }
-    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        width:90%;
-    }
-`;
-export const BotonRegistrar=styled(Boton)`
-    margin-left:10px;
-    width:95%;
-    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        width:100%;
-        margin-left:0;
     }
 `;
 export default Login;

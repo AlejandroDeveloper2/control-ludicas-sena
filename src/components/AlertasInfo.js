@@ -1,14 +1,15 @@
 import React  from 'react';
 import { Alert } from 'react-bootstrap';
+import {AlertModify} from './AlertasError';
 const AlertaInfo=({messageI, showAlertI, handleCloseAlertI})=>{    
     if (showAlertI) {
       return (
-        <Alert variant="info" style={{width:'100%', minWidth:'400px', marginTop:'10px'}} onClose={handleCloseAlertI} dismissible>
+        <AlertModify variant="info"  onClose={handleCloseAlertI} dismissible>
           <Alert.Heading>Información!</Alert.Heading>
           <p>
            {messageI}
           </p>
-        </Alert>
+        </AlertModify>
       );
     }else{
         return(
