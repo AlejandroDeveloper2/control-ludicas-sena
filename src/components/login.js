@@ -12,9 +12,8 @@ import VentanaModal from './ModalVentana';
 import FormRecuperar from './FormRecuperarContraseña';
 import FormCreacionCuenta from './FormRegistro';
 import {BotonRecuperar, BotonRegistrar, Boton} from './Botones';
+import {Input} from './Inputs';
 
-//variable global para el color del input al hacer focus 
-var color='#45CC1A';
 //componente login 
 const Login=()=>{   
     var IdForm='loginForm';
@@ -200,20 +199,6 @@ const ContainerM=styled(Container)`
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         width:100%;
-    }
-`;
-export const Input=styled.input`
-    width:100%;
-    height:30px;
-    border:none;
-    border-bottom:1px solid #333;
-    background:none;
-    outline: none;
-    position:relative;
-    font-weight:bold;
-    margin: 25px 25px 0px 0px;
-    &:focus{
-        border-bottom:2px solid ${color};
     }
 `;
 export const Fila=styled.div`

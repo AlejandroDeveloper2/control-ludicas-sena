@@ -1,12 +1,14 @@
 import React, {useRef, useState} from 'react';
 import {Container } from 'react-bootstrap';
-import {Input, Fila, Col, FilaVariant} from './login';
+import {Fila, Col, FilaVariant} from './login';
 import {marcarInputErroneo, focusOff, focusOn} from '../functions/focusInput';
 import {validarCorreo} from '../functions/validacionCorreos';
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
 import {BotonRecuperar as BotonLimpiar, BotonRegistrar as BotonVerificar} from './Botones';
+import {Input} from './Inputs';
+
 const FormRecuperarClave=()=>{
     var IdForm='formRecuperarPassword';
     const [valorEmail, setValorEmail]=useState('');

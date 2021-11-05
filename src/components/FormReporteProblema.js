@@ -2,7 +2,7 @@ import React, {useState, useRef}from 'react';
 import styled from 'styled-components';
 import {Container } from 'react-bootstrap';
 import {marcarInputErroneo, focusOn, focusOff} from '../functions/focusInput';
-import {Form, Input, Fila, Col, FilaVariant} from './login';
+import {Form, Fila, Col, FilaVariant} from './login';
 import {tieneNumeros, tieneSimbolos} from '../functions/seguridadPassword';
 import {validarCorreo} from '../functions/validacionCorreos';
 import breakpoint from '../functions/Breakpoints';
@@ -11,6 +11,7 @@ import AlertaSuccess from './AlertasSuccess';
 import AlertaInfo from './AlertasInfo';
 import Navegacion from './MenuNavegacionExterna';
 import {BotonRecuperar as BotonLimpiar, BotonRegistrar as BotonEnviar} from './Botones';
+import {Input} from './Inputs';
 //variable global para el color del input al hacer focus 
 var color='#45CC1A';
 const FormReportar=()=>{
@@ -120,9 +121,9 @@ const FormReportar=()=>{
             handleShowAlert();
             setMessageError('El campo mensaje no puede estar vacio!');
             marcarInputErroneo(mensaje_txt);
-        }else if(tieneNumeros(mensajeUsuario.mensaje ) || tieneSimbolos(mensajeUsuario.mensaje)){
+        }else if(tieneSimbolos(mensajeUsuario.mensaje)){
             handleShowAlert();
-            setMessageError('El campo mensaje solo puede contener letras!');
+            setMessageError('El campo mensaje solo puede contener letras y numeros!');
             marcarInputErroneo(mensaje_txt);
         }else{
             limpiarInputs();
@@ -198,8 +199,7 @@ const FormReportar=()=>{
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 
             </ContainerM> 
         </div>
-    );
-    
+    );  
 }
 
 export default FormReportar;

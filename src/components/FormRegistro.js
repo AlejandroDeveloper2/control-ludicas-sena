@@ -1,6 +1,6 @@
 import React, {useRef, useState}from 'react';
 import {Container } from 'react-bootstrap';
-import {Input, Fila, Col, FilaVariant} from './login';
+import {Fila, Col, FilaVariant} from './login';
 import {tieneNumeros, tieneLetras, tieneSimbolos, calcularSeguridadPass, valoracionSeguridadPass} from '../functions/seguridadPassword';
 import AlertaError from './AlertasError';
 import AlertaSuccess from './AlertasSuccess';
@@ -9,7 +9,7 @@ import MedidorSeguridad from './MedidorSeguridadClave';
 import {validarCorreo} from '../functions/validacionCorreos';
 import {marcarInputErroneo, focusOn,focusOff} from '../functions/focusInput';
 import {BotonRecuperar as BotonLimpiar, BotonRegistrar} from './Botones';
-import styled from 'styled-components';
+import {Input, Select} from './Inputs';
 
 //componente formulario de registro
 const FormRegistro=()=> {
@@ -355,20 +355,4 @@ const FormRegistro=()=> {
        
     );
 }
-const Select=styled.select`
-    width:100%;
-    height:30px;
-    border:none;
-    border-bottom:1px solid #333;
-    background:none;
-    outline: none;
-    position:relative;
-    font-weight:bold;
-    margin: 25px 25px 0px 0px;
-    transition:all 0.5 ease-in-out;
-    &:focus{
-        transition:all 0.5 ease-in-out;
-        border-bottom:2px solid #45CC1A;
-    }
-`;
 export default FormRegistro;
