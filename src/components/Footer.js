@@ -52,6 +52,6 @@ const FooterDiv=styled.div`
         position:relative;
     }
     @media only screen and (min-width: 768px) and (max-width:768px){
-        position:absolute;
+        position:relative;
     }
 `;

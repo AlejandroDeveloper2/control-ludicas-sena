@@ -1,17 +1,17 @@
 import React, {useState, useRef}from 'react';
 import styled from 'styled-components';
 import {Container } from 'react-bootstrap';
-import {marcarInputErroneo, focusOn, focusOff} from '../functions/focusInput';
+import {marcarInputErroneo, focusOn, focusOff} from '../../functions/focusInput';
 import {Form, Fila, Col, FilaVariant} from './login';
-import {tieneNumeros, tieneSimbolos} from '../functions/seguridadPassword';
-import {validarCorreo} from '../functions/validacionCorreos';
-import breakpoint from '../functions/Breakpoints';
-import AlertaError from './AlertasError';
-import AlertaSuccess from './AlertasSuccess';
-import AlertaInfo from './AlertasInfo';
-import Navegacion from './MenuNavegacionExterna';
-import {BotonRecuperar as BotonLimpiar, BotonRegistrar as BotonEnviar} from './Botones';
-import {Input} from './Inputs';
+import {tieneNumeros, tieneSimbolos} from '../../functions/seguridadPassword';
+import {validarCorreo} from '../../functions/validacionCorreos';
+import breakpoint from '../../functions/Breakpoints';
+import AlertaError from '../Alertas/AlertasError';
+import AlertaSuccess from '../Alertas/AlertasSuccess';
+import AlertaInfo from '../Alertas/AlertasInfo';
+import Navegacion from '../MenuNavegacionExterna';
+import {BotonRecuperar as BotonLimpiar, BotonRegistrar as BotonEnviar} from '../Botones';
+import {Input} from '../Inputs';
 //variable global para el color del input al hacer focus 
 var color='#45CC1A';
 const FormReportar=()=>{

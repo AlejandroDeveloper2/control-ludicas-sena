@@ -68,7 +68,7 @@ const PanelAdmin=()=>{
 
     window.addEventListener('resize', ajustarMenu);
     return(
-        <ContenedorPagina>
+        <div>
             <ContenedorMenu style={ubicacionMenu} >
                 <HeaderMenu>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
@@ -125,8 +125,8 @@ const PanelAdmin=()=>{
                 </ContenedorLogo>
             </ContenedorMenu>
             <BotonEsconderMenu onClick={esconderMenu} style={ubicacionBoton} >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16" style={iconoBotonRotate}>
-                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16" style={iconoBotonRotate}>
+                    <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                 </svg>
             </BotonEsconderMenu>
             <MenuHorizontal>
@@ -158,7 +158,7 @@ const PanelAdmin=()=>{
                     </BotonCerrarSesion>
                 </InfoUser>
             </MenuHorizontal>
-        </ContenedorPagina>
+        </div>
     );
 }
 export default PanelAdmin;
@@ -202,7 +202,7 @@ const InfoUser=styled.div`
 `;
 const ContenedorMenu=styled.div`
     width:15%;
-    height:100%;
+    height:83%;
     position:absolute;
     left:0;
     z-index:1;
@@ -211,25 +211,23 @@ const ContenedorMenu=styled.div`
     transition: all 0.5s ease;
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         width:26%;
+        position:fixed;
+        height:auto;
         transform:translateX(-120px);
         transition: all 0.5s ease;
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         width:15%;
+        height:auto;
         transform:translateX(-120px);
+        position:fixed;
         transition: all 0.5s ease;
     }
     @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
         width:25%;
         transition: all 0.5s ease;
+        height:100%;
     }
-`;
-const ContenedorPagina=styled.div`
-    width:100%;
-    height:780px;
-    position:relative;
-    background:rgba(255, 255, 255, 0.6);
-   
 `;
 const MenuHorizontal=styled.div`
     width:85%;
@@ -243,15 +241,19 @@ const MenuHorizontal=styled.div`
         float:left;
         transition: all 0.5s ease;
         width:100%;
+        height:80px;
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         float:left;
         transition: all 0.5s ease;
         width:100%;
+        height:80px;
+
     }
     @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
         width:100%;
         transition: all 0.5s ease;
+        height:80px;
     }
 `;
 const HeaderMenu=styled.div`

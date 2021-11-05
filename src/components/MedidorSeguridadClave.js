@@ -21,9 +21,12 @@ const Medidor=styled.div`
     width:${props=>props.load};
     background:${props=>props.colorFondo};
     span{
+        transition:all 0.3s ease-in;
+        transition-delay:${props=>props.load==='0%' ? '0.1s':'0.5s'};
         line-height:20px;
         color:#fff;
         width:100%;
+        opacity:${props=>props.load==='0%' ? '0':'1'};
         text-align:center;
     }
 `;

@@ -73,7 +73,6 @@ export const BotonCerrarSesion=styled.button`
         font-weight:bold;
         border:solid 2px rgba(255, 255, 255, 0.4);
         ${Svg1} {
-            transition: all 0.5s ease;
             transform:scale(1.2);
         }
     }
@@ -102,6 +101,7 @@ export const BotonPerfil=styled(BotonCerrarSesion)`
             stroke-dashoffset:0;
         }  
         ${Svg}{
+            transition:all 0.8s ease;
             transform:rotate(360deg);
         }    
     }

@@ -1,18 +1,18 @@
 import React, {useState, useRef} from "react";
 import styled from 'styled-components';
 import {Container } from 'react-bootstrap';
-import AlertaError from './AlertasError';
-import AlertaSuccess from './AlertasSuccess';
-import AlertaInfo from './AlertasInfo';
-import {tieneLetras, tieneSimbolos} from '../functions/seguridadPassword';
-import {marcarInputErroneo, focusOff, focusOn} from '../functions/focusInput';
-import breakpoint from '../functions/Breakpoints';
-import Navegacion from './MenuNavegacionExterna';
-import VentanaModal from './ModalVentana';
+import AlertaError from '../Alertas/AlertasError';
+import AlertaSuccess from '../Alertas/AlertasSuccess';
+import AlertaInfo from '../Alertas/AlertasInfo';
+import {tieneLetras, tieneSimbolos} from '../../functions/seguridadPassword';
+import {marcarInputErroneo, focusOff, focusOn} from '../../functions/focusInput';
+import breakpoint from '../../functions/Breakpoints';
+import Navegacion from '../MenuNavegacionExterna';
+import VentanaModal from '../ModalVentana';
 import FormRecuperar from './FormRecuperarContraseña';
 import FormCreacionCuenta from './FormRegistro';
-import {BotonRecuperar, BotonRegistrar, Boton} from './Botones';
-import {Input} from './Inputs';
+import {BotonRecuperar, BotonRegistrar, Boton} from '../Botones';
+import {Input} from '../Inputs';
 
 //componente login 
 const Login=()=>{   
