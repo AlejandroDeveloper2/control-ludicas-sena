@@ -164,11 +164,11 @@ const Login=()=>{
                     </BotonRegistrar>
                 </FilaVariant>
             </Form>
-            <Container className="d-flex justify-content-center" style={{width:'30%'}}>
+            <ContainerM className="d-flex justify-content-center">
                 <AlertaError  message={messageError} showAlert={showAlertError} handleCloseAlert={handleCloseAlert}/>  
                 <AlertaSuccess  message={messageSuccess} showAlert={showAlertSuccess} handleCloseAlert={handleCloseAlertS} /> 
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 
-            </Container>
+            </ContainerM>
             <VentanaModal show={show} handleClose={handleClose} titulo='Formulario de registro'>           
                 <FormCreacionCuenta />
             </VentanaModal>
@@ -191,6 +191,15 @@ export const Form= styled.form`
     box-shadow:10px 10px 10px rgba(0,0,0,0.5);
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         margin-top:75px;
+    }
+`;
+const ContainerM=styled(Container)`
+    width:20%;
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        width:100%;
+    }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        width:100%;
     }
 `;
 export const Input=styled.input`

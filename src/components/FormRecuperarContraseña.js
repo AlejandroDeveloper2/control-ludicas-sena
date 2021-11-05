@@ -100,7 +100,7 @@ const FormRecuperarClave=()=>{
                     </BotonVerificar>
                 </FilaVariant>          
             </form>
-            <Container>
+            <Container className="d-flex justify-content-center">
                 <AlertaError  message={messageError} showAlert={showAlertError} handleCloseAlert={handleCloseAlert}/>  
                 <AlertaSuccess  message={messageSuccess} showAlert={showAlertSuccess} handleCloseAlert={handleCloseAlertS} /> 
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 

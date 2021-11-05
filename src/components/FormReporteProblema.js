@@ -192,17 +192,26 @@ const FormReportar=()=>{
                         </BotonEnviar>
                 </FilaVariant>
             </Form>
-            <Container style={{width:'30%'}}>
+            <ContainerM className="d-flex justify-content-center" >
                 <AlertaError  message={messageError} showAlert={showAlertError} handleCloseAlert={handleCloseAlert}/>  
                 <AlertaSuccess  message={messageSuccess} showAlert={showAlertSuccess} handleCloseAlert={handleCloseAlertS} /> 
                 <AlertaInfo  messageI={messageInfo} showAlertI={showAlertInfo} handleCloseAlertI={handleCloseAlertI} /> 
-            </Container> 
+            </ContainerM> 
         </div>
     );
     
 }
 
 export default FormReportar;
+const ContainerM=styled(Container)`
+    width:20%;
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        width:100%;
+    }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        width:100%;
+    }
+`;
 const TextArea=styled.textarea`
     width:100%;
     height:80px;
