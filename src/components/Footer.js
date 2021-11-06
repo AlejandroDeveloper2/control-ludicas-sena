@@ -5,7 +5,7 @@ import breakpoint from '../functions/Breakpoints';
 //componente pie de pagina 
 const Footer=()=>{
     return(
-        <FooterDiv className="footer">
+        <FooterDiv >
             <article>
                 <h5>© Aplicacion web creada por aprendiz de El SENA
                 todos los derechos reservados</h5>
@@ -19,7 +19,6 @@ const FooterDiv=styled.div`
     width:100%;
     position:absolute;
     bottom:0;
-    min-height:70px;
     padding:10px;
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -52,6 +51,6 @@ const FooterDiv=styled.div`
         position:relative;
     }
     @media only screen and (min-width: 768px) and (max-width:768px){
-        position:relative;
+        position:absolute;
     }
 `;

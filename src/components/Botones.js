@@ -42,6 +42,11 @@ export const Boton=styled.button`
             display:none;
         }
     }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        p{
+            display:none;
+        }
+    }
 `;
 export const BotonRecuperar=styled(Boton)`
     background:#D42D19;
@@ -142,9 +147,11 @@ export const BotonEsconderMenu=styled.button`
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         display:block;
         position:fixed;  
+        margin-top:40%;
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         display:block;
-        position:fixed;
+        margin-top:30%;
+        position:absolute;
     }   
 `;

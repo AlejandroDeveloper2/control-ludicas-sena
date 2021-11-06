@@ -78,7 +78,16 @@ const PanelAdmin=()=>{
                 </HeaderMenu>
                 <Ul>
                     <li>
-                        <Link to="/" >
+                        <Link to="/MenuPrincipal" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fillRule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg> 
+                            <p>Inicio</p>
+                        </Link >   
+                    </li> 
+                    <li>
+                        <Link to="#" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-person-lines-fill" viewBox="0 0 16 16">
                                 <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
                             </svg>   
@@ -186,7 +195,7 @@ const InfoUser=styled.div`
         margin:0 20px;
     }
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        width:95%;    
+        width:100%;    
         padding-left:10px;
         span{
             margin:0 10px;
@@ -209,10 +218,12 @@ const ContenedorMenu=styled.div`
     background-color:rgb(33,37,41);
     border-bottom-right-radius: 20px;
     transition: all 0.5s ease;
+    overflow:hidden;
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         width:26%;
-        position:fixed;
         height:auto;
+        position:fixed;
+        border-top-right-radius: 20px;
         transform:translateX(-120px);
         transition: all 0.5s ease;
     }
@@ -220,7 +231,6 @@ const ContenedorMenu=styled.div`
         width:15%;
         height:auto;
         transform:translateX(-120px);
-        position:fixed;
         transition: all 0.5s ease;
     }
     @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
@@ -239,6 +249,7 @@ const MenuHorizontal=styled.div`
     transition: all 0.5s ease;
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         float:left;
+        position:fixed;
         transition: all 0.5s ease;
         width:100%;
         height:80px;
@@ -368,6 +379,7 @@ const ContenedorLogo=styled.div`
         transition:all 0.5s ease;
     }
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        margin-top:0;
         img{
             transition:all 0.5s ease;
             transform:scale(0.5);

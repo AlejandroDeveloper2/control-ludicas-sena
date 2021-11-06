@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import MenuPrincipal from '../MenuPrincipal';
 import {ContenedorPagina} from '../ContenedorPagina';
@@ -49,7 +49,7 @@ const ModuloPanelControl=()=>{
 }
 export default ModuloPanelControl;
 const Card=styled.div`
-    width:15%;
+    width:20%;
     min-width:100px;
     height:300px;
     background:rgba(255,255,255,0.8);
@@ -59,10 +59,12 @@ const Card=styled.div`
     overflow:hidden;
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         width:85%; 
+        height:250px;
         margin:10px auto;
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
-        width:70%;
+        width:40%;
+        height:200px;
         margin:20px auto;
     }
     @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
@@ -81,6 +83,16 @@ const CardHeader=styled.div`
         margin-left:10px;
         font-weight:bold;
     } 
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{ 
+        h5{
+            font-size:15px;
+        }
+    }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        h5{
+            font-size:15px;
+        }
+    }
 `;
 const CardHeader2=styled(CardHeader)`
     background:#333;

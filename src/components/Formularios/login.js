@@ -189,7 +189,10 @@ export const Form= styled.form`
     padding:30px;
     box-shadow:10px 10px 10px rgba(0,0,0,0.5);
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        margin-top:75px;
+        margin-top:40%;
+    }
+    @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
+        margin-top:20%;
     }
 `;
 const ContainerM=styled(Container)`
@@ -199,6 +202,9 @@ const ContainerM=styled(Container)`
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         width:100%;
+    }
+    @media only screen and ${breakpoint.device.lg} ${breakpoint.device.Mlg}{
+        width:50%;
     }
 `;
 export const Fila=styled.div`
