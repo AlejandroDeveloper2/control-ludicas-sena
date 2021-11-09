@@ -235,8 +235,12 @@ const TextArea=styled.textarea`
 const FilaTextArea=styled.div`
     display:grid;
     width:100%;
-    grid-template-columns:0.1fr 1fr 0.2fr;
+    gap:10px;
+    grid-template-columns:0.1fr 1fr 0.1fr;
     span{
         margin-top:20px;
+    }
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        gap:20px;
     }
 `;

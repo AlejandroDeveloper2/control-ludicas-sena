@@ -12,4 +12,5 @@ body{
     background-position: center center;
     background-attachment: fixed;
     color:#000;
+    box-sizing: border-box;
 }

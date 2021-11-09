@@ -54,7 +54,7 @@ export const BotonRecuperar=styled(Boton)`
         background:#BC2914;
     }
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
-        width:90%;
+        width:100%;    
     }
 `;
 export const BotonRegistrar=styled(Boton)`
@@ -147,11 +147,26 @@ export const BotonEsconderMenu=styled.button`
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         display:block;
         position:fixed;  
-        margin-top:40%;
+        margin-top:50%;
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         display:block;
         margin-top:30%;
         position:absolute;
+    }   
+`;
+export const BotonVer=styled.button`
+    width:100%;
+    padding:10px;
+    border:solid 1px #C8C2C2;
+    color:#333;
+    border-radius:10px;
+    transition:all 0.5s ease;
+    &:hover{
+        background:#333;
+        color:#fff;
+    }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        width:80%;
     }   
 `;

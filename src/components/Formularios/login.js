@@ -210,11 +210,15 @@ const ContainerM=styled(Container)`
 export const Fila=styled.div`
     display:grid;
     width:100%;
+    gap:10px;
     grid-template-columns:0.1fr 1fr;
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        gap:20px;
+    }
 `;
 export const FilaVariant=styled(Fila)`
     grid-template-columns:1fr 1fr;
-    
+    gap:10px;
 `;
 export const Col=styled.div`
     display:flex;

@@ -4,9 +4,9 @@ const size = {
     lg: '1024px',
 }
 const MaxSize = {
-    Mxs: '500px',
-    Msm: '900px',
-    Mlg: '1400px',
+    Mxs: '539px',
+    Msm: '1023px',
+    Mlg: '1500px',
 }
 //objeto para hacer referencia a los diferentes anchos minmos de los dispositivos para responsive desing
 const device = {

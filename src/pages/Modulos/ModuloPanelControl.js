@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MenuPrincipal from '../MenuPrincipal';
 import {ContenedorPagina} from '../ContenedorPagina';
 import breakpoint from '../../functions/Breakpoints';
+import {BotonVer} from '../../components/Botones';
 
 const ModuloPanelControl=()=>{
     return(
@@ -16,6 +17,15 @@ const ModuloPanelControl=()=>{
                             </svg>
                             <h5>Aprendices registrados</h5>
                         </CardHeader>
+                        <CardBody>
+                            <h1>20</h1>
+                            <BotonVer title="Ver lista de aprendices">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>                               
+                            </BotonVer>
+                        </CardBody>
                     </Card>
                     <Card>
                         <CardHeader2>
@@ -25,6 +35,15 @@ const ModuloPanelControl=()=>{
                             </svg>
                             <h5>Profesores registrados</h5>
                         </CardHeader2>
+                        <CardBody>
+                            <h1>25</h1>     
+                            <BotonVer title="Ver lista de profesores">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>                                
+                            </BotonVer>                     
+                        </CardBody>
                     </Card>
                     <Card>
                         <CardHeader3>
@@ -33,6 +52,15 @@ const ModuloPanelControl=()=>{
                             </svg>
                             <h5>Reportes de usuarios</h5>
                         </CardHeader3>
+                        <CardBody>
+                            <h1>30</h1> 
+                            <BotonVer title="Ver lista de usuarios">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>                                
+                            </BotonVer>  
+                        </CardBody>
                     </Card>
                     <Card>
                         <CardHeader4>
@@ -41,7 +69,15 @@ const ModuloPanelControl=()=>{
                             </svg>
                             <h5>Lugar Ludicas registrado</h5>
                         </CardHeader4>
-
+                        <CardBody>
+                            <h1>5</h1> 
+                            <BotonVer title="Ver lista de lugares de actividades">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>                                
+                            </BotonVer>  
+                        </CardBody>
                     </Card>             
             </ContenedorPagina>
         </>     
@@ -50,6 +86,7 @@ const ModuloPanelControl=()=>{
 export default ModuloPanelControl;
 const Card=styled.div`
     width:20%;
+    position:relative;
     min-width:100px;
     height:300px;
     background:rgba(255,255,255,0.8);
@@ -89,8 +126,39 @@ const CardHeader=styled.div`
         }
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        padding:20px;
         h5{
             font-size:15px;
+        }
+    }
+`;
+const CardBody=styled.div`
+    width:100%;
+    height:75%;
+    background:none;
+    bottom:0;
+    left:0;
+    display:grid;
+    justify-content:center;
+    align-items:center;
+    grid-template-rows:1fr 1fr;
+    h1{
+        font-weight:bold;
+        font-size:60px;
+        text-align:center;
+        color:#717171;
+    }
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        padding:10px;
+        h5{
+            font-size:30px;
+        }
+    }
+    @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
+        grid-template-columns:1fr 0.5fr;
+        padding:10px;
+        h5{
+            font-size:40px;
         }
     }
 `;
