@@ -146,7 +146,7 @@ const FormPerfilUsuario=({handleClose})=>{
         tipoInput:'password'
     });
     //funciones para mostrar u ocultar contraseña
-    const mostrarClave=()=>{
+    const mostrarOcultarClave=()=>{
         setPropsBoton((propsBoton)=>{
             const newPropsBoton={...propsBoton};
             newPropsBoton.titulo="Ocultar contraseña";
@@ -231,7 +231,7 @@ const FormPerfilUsuario=({handleClose})=>{
                         </svg>
                     </Col>
                     <Input type={propsBoton.tipoInput} name="contraseña"  ref={pass_txt} placeholder="Ingrese su contraseña"  value={perfilUsuario.contraseña} onChange={getDataPerfil} onFocus={onFocuss} onBlur={onBlurr}/>
-                    <BotonVerVariant type="button" title={propsBoton.titulo} onClick={mostrarClave}> 
+                    <BotonVerVariant type="button" title={propsBoton.titulo} onClick={mostrarOcultarClave}> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className={propsBoton.claseIcono} viewBox="0 0 16 16">
                             <path d={propsBoton.pathIcono1}/>
                             <path d={propsBoton.pathIcono2}/>
