@@ -18,6 +18,9 @@ export const focusOff =(inputs, IdForm)=>{
         case 'formReporteProblema':
             inputs.forEach(input=>{input.current.style.borderBottom='solid 1px #000';})
         break;
+        case 'FormPerfilUsuario':
+            inputs.forEach(input=>{input.current.style.borderBottom='solid 1px #000';})
+        break;
         default:         
             console.log('Error');
         break;

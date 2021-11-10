@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import breakpoint from '../functions/Breakpoints';
 const MedidorSeguridadClave=({propsMedidor})=>{
 
     return(
@@ -38,5 +38,10 @@ const ContenedorMedidor=styled.div`
     background:none;
     margin-top:25px;
     overflow:hidden;
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        span{
+            font-size:12px;
+        }
+    }
 `;
 export default MedidorSeguridadClave;

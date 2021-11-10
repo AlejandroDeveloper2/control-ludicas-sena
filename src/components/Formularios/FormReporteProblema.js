@@ -232,7 +232,7 @@ const TextArea=styled.textarea`
         height:40px;
     }
 `;
-const FilaTextArea=styled.div`
+export const FilaTextArea=styled.div`
     display:grid;
     width:100%;
     gap:10px;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import breakpoint from '../functions/Breakpoints';
 import {Svg, Svg1} from '../pages/MenuPrincipal';
+import { Link } from "react-router-dom";
 
 export const Boton=styled.button`
     color:#fff;
@@ -55,6 +56,46 @@ export const BotonRecuperar=styled(Boton)`
     }
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         width:100%;    
+    }
+`;
+export const LinkCerrarSesion=styled(Link)`
+    color:#fff;
+    text-decoration: none;
+    width:100%;
+    padding:10px;
+    margin-top:20px;
+    z-index:1;
+    background:#D42D19;
+    position:relative;
+    cursor:pointer;
+    border:none;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    p{
+        margin:0;
+    }
+    svg{
+        margin-right:10px;
+    }
+    &::after{
+        content:'';
+        position:absolute;
+        width:100%;
+        height:100%;
+        left:-360px;
+        top:0;
+        z-index:-1;
+        background:#BC2914;
+        transition:all 0.5s ease;
+    }
+    &:hover::after{
+        left:0px;
+        transition:all 0.5s ease;
+    }
+    &:hover{
+        color:#fff;
     }
 `;
 export const BotonRegistrar=styled(Boton)`
@@ -147,7 +188,7 @@ export const BotonEsconderMenu=styled.button`
     @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
         display:block;
         position:fixed;  
-        margin-top:50%;
+        margin-top:65%;
     }
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         display:block;
@@ -169,4 +210,13 @@ export const BotonVer=styled.button`
     @media only screen and ${breakpoint.device.sm} ${breakpoint.device.Msm}{
         width:80%;
     }   
+`;
+export const BotonVerVariant=styled(BotonVer)`
+    width:80%;
+    height:30px;
+    margin-top:25px;
+    padding:0;
+    @media only screen and ${breakpoint.device.xs} ${breakpoint.device.Mxs}{
+        width:100%;
+    }
 `;
